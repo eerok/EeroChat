@@ -40,9 +40,7 @@ class ChatRoom {
     
     doBind(form)
   }
-  /**
-   Todo:implement username thingie
-   */
+
   def messages(html: NodeSeq):NodeSeq =
   {
     def getMsgs = Message.findAll(OrderBy(Message.date, Descending))
