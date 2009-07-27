@@ -12,8 +12,9 @@ import net.liftweb.http._
 class UserActor extends CometActor
 {
   
-  var messages = new ListBuffer[Message]
-
+  private var messages = List()
+  
+  def getMessages = messages
   def render = { new Text("Hello")}
-  def renderMsgs = { new Text("Hulloe")}
+  
 }

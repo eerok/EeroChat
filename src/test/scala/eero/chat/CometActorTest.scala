@@ -27,15 +27,12 @@ class CometActorTest extends TestCase
 	  actor.start
   }
   
-  def parseNick(msg:NodeSeq) = msg.text.split(":").first
   
   def testSingleMessage = 
   {
       actor ! Send (hello)
       Thread.sleep(100)
-      var msgs:NodeSeq = actor.renderMsgs
-      var gotNick = parseNick(msgs)
-      assertEquals("Expected nick not found", nick, gotNick)
+      assertFalse("Expected nick not found", actor.getMessages.isEmpty )
   }
   
 }
