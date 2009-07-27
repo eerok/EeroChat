@@ -32,7 +32,7 @@ class CometActorTest extends TestCase
   {
       actor ! Send (hello)
       Thread.sleep(100)
-      assertFalse("Expected nick not found", actor.getMessages.isEmpty )
+      assertFalse("Message list is empty", actor.getMessages.isEmpty )
   }
   
 }
