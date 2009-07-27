@@ -1,0 +1,17 @@
+<lift:surround with="default" at="content">
+ 
+<h2>Ekichat</h2>
+ 	<lift:Util.in>
+ 		<div id="messages" style="height: 200px; overflow : auto;">
+ 			<lift:ChatRoom.messages />
+ 		</div>
+ 		<lift:ChatRoom.say form="post">
+ 			<message:text>Message</message:text><message:submit>Say</message:submit>
+ 		</lift:ChatRoom.say>
+	</lift:Util.in>
+
+	<lift:Util.out>Please
+    	<lift:menu.item name="Login">Log In</lift:menu.item>
+	</lift:Util.out>
+</lift:surround>
+
