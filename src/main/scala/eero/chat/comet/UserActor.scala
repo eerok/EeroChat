@@ -17,4 +17,13 @@ class UserActor extends CometActor
   def getMessages = messages
   def render = { new Text("Hello")}
   
+  def act = loop
+  {
+    react
+    {
+      case Send(message: Message) =>
+        messages :: message
+    }
+  }
+  
 }
