@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="1.027" errors="0" skipped="0" tests="4" name="eero.chat.ActorTest">
+<testsuite failures="0" time="0.914" errors="0" skipped="0" tests="4" name="eero.chat.ActorTest">
   <properties>
     <property name="java.vendor" value="Sun Microsystems Inc."/>
     <property name="env.SESSION_MANAGER" value="local/eero-laptop:/tmp/.ICE-unix/5999"/>
@@ -59,7 +59,7 @@
     <property name="env.XMODIFIERS" value="@im=SCIM"/>
     <property name="env.GDM_LANG" value="en_US.UTF-8"/>
     <property name="user.home" value="/home/eero"/>
-    <property name="env.OLDPWD" value="/home/eero/workspace/chat/lift_example"/>
+    <property name="env.OLDPWD" value="/home/eero/workspace/chat/src"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="env.WINDOWID" value="65012426"/>
     <property name="java.library.path" value="/usr/lib/jvm/java-6-sun-1.6.0.10/jre/lib/i386/server:/usr/lib/jvm/java-6-sun-1.6.0.10/jre/lib/i386:/usr/lib/jvm/java-6-sun-1.6.0.10/jre/../lib/i386:/usr/java/packages/lib/i386:/lib:/usr/lib"/>
@@ -100,8 +100,8 @@
     <property name="java.specification.version" value="1.6"/>
     <property name="env.LESSCLOSE" value="/usr/bin/lesspipe %s %s"/>
   </properties>
-  <testcase time="0.416" classname="eero.chat.ActorTest" name="testLeaveRoom"/>
-  <testcase time="0.203" classname="eero.chat.ActorTest" name="testTwoUsers"/>
+  <testcase time="0.302" classname="eero.chat.ActorTest" name="testLeaveRoom"/>
+  <testcase time="0.204" classname="eero.chat.ActorTest" name="testTwoUsers"/>
   <testcase time="0.202" classname="eero.chat.ActorTest" name="testOneUserJoinAndSend"/>
-  <testcase time="0.201" classname="eero.chat.ActorTest" name="testSendToWrongRoom"/>
+  <testcase time="0.203" classname="eero.chat.ActorTest" name="testSendToWrongRoom"/>
 </testsuite>
