@@ -24,7 +24,7 @@ class MockUser extends Actor
   }
 }
 
-class ActorTest extends TestCase
+class RoomActorTest extends TestCase
 {
  
   var room = new RoomActor
