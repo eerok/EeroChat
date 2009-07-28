@@ -5,11 +5,14 @@ import scala.collection.mutable.HashMap
 import scala.collection.mutable.ListBuffer
 import scala.actors._
 import scala.actors.Actor._
+import java.lang.System
 
 case class Join(user:Actor)
 case class Leave(user:Actor)
 case class Send(message:Message)
 
+
+object DefaultRoom extends RoomActor
 
 class RoomActor extends Actor
 {

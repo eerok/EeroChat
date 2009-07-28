@@ -3,7 +3,7 @@ package eero.chat.model
 import _root_.net.liftweb._
 import mapper._
 import util._
-import scala.xml.Text
+import scala.xml._
 
 object Message extends Message with LongKeyedMetaMapper[Message]{
   
@@ -19,8 +19,12 @@ class Message extends LongKeyedMapper[Message] with IdPK {
   
   def senderNick: Text = 
    {
-    def findSender(id:Long) = User.findAll( By(User.id, id) ).head
+    val mrT = User.create.nick("Mr. T")
+    def findSender(msg:Message) = msg.sender.obj openOr mrT
     
-    Text ( findSender(this.sender.is).nick.is )
+    Text ( findSender(this).nick.is )
   }
+  
+  def render():NodeSeq =  
+      Text (senderNick + ": " + this.text) ++ <br/> 
 }

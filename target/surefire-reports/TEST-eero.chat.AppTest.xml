@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="1.319" errors="0" skipped="0" tests="2" name="eero.chat.AppTest">
+<testsuite failures="0" time="1.625" errors="0" skipped="0" tests="2" name="eero.chat.AppTest">
   <properties>
     <property name="java.vendor" value="Sun Microsystems Inc."/>
     <property name="env.SESSION_MANAGER" value="local/eero-laptop:/tmp/.ICE-unix/5999"/>
@@ -100,6 +100,6 @@
     <property name="java.specification.version" value="1.6"/>
     <property name="env.LESSCLOSE" value="/usr/bin/lesspipe %s %s"/>
   </properties>
-  <testcase time="1.293" classname="eero.chat.AppTest" name="testXml"/>
-  <testcase time="0.001" classname="eero.chat.AppTest" name="testOK"/>
+  <testcase time="1.623" classname="eero.chat.AppTest" name="testXml"/>
+  <testcase time="0" classname="eero.chat.AppTest" name="testOK"/>
 </testsuite>

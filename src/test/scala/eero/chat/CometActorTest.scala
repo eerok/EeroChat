@@ -32,7 +32,7 @@ class CometActorTest extends TestCase
   {
       actor ! Send (hello)
       Thread.sleep(100)
-      assertFalse("Message list is empty", actor.getMessages.isEmpty )
+      assertTrue("Message list is empty", actor.getMessages.length > 0 )
   }
   
 }

@@ -9,7 +9,7 @@ import net.liftweb.mapper.{DB, ConnectionManager, Schemifier, DefaultConnectionI
 import java.sql.{Connection, DriverManager}
 import eero.chat.model._
 import javax.servlet.http.{HttpServletRequest}
-
+import eero.chat.comet._
 
 /**
   * A class that's instantiated early and run.  It allows the application
@@ -45,6 +45,8 @@ class Boot {
     LiftRules.loggedInTest = Full(() => User.loggedIn_?)
 
     S.addAround(DB.buildLoanWrapper)
+    
+    DefaultRoom.start
   }
 
   /**

@@ -1,6 +1,7 @@
 package eero.chat.snippet
 
 import eero.chat.model._
+import eero.chat.comet._
 
 import net.liftweb._ 
 import http._ 
@@ -24,30 +25,27 @@ class ChatRoom {
   def say(form: NodeSeq) = 
   {
   	
-    val message = Message.create.sender(User.currentUser)
+    val message = Message.create.sender(User.currentUser).room(1)
     
-    def checkAndSave(): Unit =
+    def saveAndSend(msg: Message):Unit =
+    {
+      msg.date(new Date).save 
+      DefaultRoom ! Send (msg)
+    }
+    
+    def checkAndSend(): Unit =
 	  message.validate match 
       {
-	   	case Nil => message.date(new Date).save;
+	   	case Nil => saveAndSend(message)
 	   	case xs => S.error(xs);
-       }
+    }
     
     def doBind(form: NodeSeq) =
     	bind("message", form,
              "text" -> message.text.toForm,
-             "submit" -> submit("Say", checkAndSave))
+             "submit" -> submit("Say", checkAndSend))
     
     doBind(form)
   }
 
-  def messages(html: NodeSeq):NodeSeq =
-  {
-    def getMsgs = Message.findAll(OrderBy(Message.date, Descending))
-    
-    def formatMsg(msg:Message):NodeSeq = 
-      Text (msg.senderNick + "@" + msg.date + ": " + msg.text) ++ <br/> 
-    
-    getMsgs.flatMap( formatMsg )
-  }
 }

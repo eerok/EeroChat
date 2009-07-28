@@ -2,9 +2,9 @@
  
 <h2>Ekichat</h2>
  	<lift:Util.in>
- 		<div id="messages" style="height: 200px; overflow : auto;">
- 			<lift:ChatRoom.messages />
- 		</div>
+ 			<lift:comet type="UserActor" name="default">				
+ 					<chat:messages/>
+ 			</lift:comet>
  		<lift:ChatRoom.say form="post">
  			<message:text>Message</message:text><message:submit>Say</message:submit>
  		</lift:ChatRoom.say>
