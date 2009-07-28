@@ -16,9 +16,7 @@ object User extends User with MetaMegaProtoUser[User] {
   override def signupFields: List[BaseOwnedMappedField[User]] = firstName :: 
 	  															     lastName ::
 	  															     nick ::
-                                                                     email :: 
-                                                                     locale :: 
-                                                                     timezone :: 
+                                                                     email ::  
                                                                      password :: 
                                                                      Nil  
   // define the order fields will appear in forms and output

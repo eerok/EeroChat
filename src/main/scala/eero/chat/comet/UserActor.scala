@@ -21,7 +21,10 @@ class UserActor extends CometActor
   def getMessages = messages
   def msgList = messages.flatMap( _.render )
   def render = bind( "messages"-> msgDiv)
-  def msgDiv = <div id="messages" style="height: 200px; overflow : auto;"> {msgList} </div>
+  def msgDiv = 
+    <div id="messages" style="height: 200px; overflow : auto;">
+    {msgList}
+    </div>
   
   override def lowPriority =
   {
