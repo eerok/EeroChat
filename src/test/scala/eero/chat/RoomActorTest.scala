@@ -56,12 +56,14 @@ class RoomActorTest extends TestCase
 	assertEquals("Sent message id should match received", received.id, hello.id)
   }
   
-  def testSendToWrongRoom =
+  def testLocateAndSend
   {
-	room ! Send( helloRoom2 )
-	Thread.sleep(100)
-	val received = pete.latest
-	assertNull("Should not receive anything", received)
+    val id = 1
+    RoomLocator.add( id, room )
+    RoomLocator.add( 2, new RoomActor )
+    RoomLocator.add( 67, new RoomActor )
+    room = RoomLocator.find(id) getOrElse new RoomActor
+    testOneUserJoinAndSend
   }
   
   def testTwoUsers = 
