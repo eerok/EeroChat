@@ -15,6 +15,7 @@ import scala.actors.Actor._
 
 class MessageListTest extends TestCase
 {
+  /*
   val nick = "Eero"
   val msgTxt = "Hello World!"
   val user = User.create.nick(nick)
@@ -23,11 +24,13 @@ class MessageListTest extends TestCase
   var actor = new MessageList
   
   val tmpl = <chat:messages></chat:messages>
-  
+  */
   override def setUp =
   {
+  /*
 	  actor = new MessageList
 	  actor.start
+   */
   }
   
   /*
