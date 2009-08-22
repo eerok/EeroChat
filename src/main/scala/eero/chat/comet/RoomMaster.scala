@@ -1,8 +1,7 @@
 package eero.chat.comet
 
 import eero.chat.model._
-import scala.collection.mutable.HashMap
-import scala.collection.mutable.ListBuffer
+import scala.collection.mutable._
 import scala.actors._
 import scala.actors.Actor._
 import java.lang.System
@@ -26,10 +25,10 @@ object DefaultRoom extends RoomMaster
 
 class RoomMaster extends Actor
 {
-  var listeners = new HashMap[Int, Actor]
-  private var members = List[User]()
+  var listeners = new HashSet[Actor]
+  private var members = new HashSet[User]
   
-  private def broadCast(m:Any) = listeners.values.foreach( _ ! m )
+  private def broadCast(m:Any) = listeners.foreach( _ ! m )
   
   private def updateMembershipInfo(listener:Actor) = members.foreach( listener ! Join (_) )
   
@@ -38,19 +37,19 @@ class RoomMaster extends Actor
     react
     {
       case Subscribe(user:Actor) =>
-        listeners += user.hashCode -> user
+        listeners += user
         updateMembershipInfo(user)
 	    
 	  case UnSubscribe(user:Actor) =>
-	    listeners -= user.hashCode
+	    listeners -= user
       
 	  case j@Join(user:User) =>
 	    broadCast(j)
-	    members = user :: members
+	    members += user
    
 	  case l@Leave(user:User) =>
 	    broadCast(l)
-	    members = members.remove( _  equals user)
+	    members -= user
 	  
 	  case msg =>
 	    broadCast(msg)

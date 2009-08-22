@@ -17,6 +17,9 @@ class Message extends LongKeyedMapper[Message] with IdPK {
   object text extends MappedPoliteString(this, 128)
   object date extends MappedDateTime(this)
   
+  /**
+   * Default administrator user for notifications
+   */
   
   val mrT = User.create.nick("Mr. T")
 
