@@ -31,7 +31,7 @@ class RoomMaster extends Actor
   
   private def broadCast(m:Any) = listeners.values.foreach( _ ! m )
   
-  private def updateMembership(listener:Actor) = members.foreach( listener ! Join (_) )
+  private def updateMembershipInfo(listener:Actor) = members.foreach( listener ! Join (_) )
   
   def act = loop
   {
@@ -39,7 +39,7 @@ class RoomMaster extends Actor
     {
       case Subscribe(user:Actor) =>
         listeners += user.hashCode -> user
-        updateMembership(user)
+        updateMembershipInfo(user)
 	    
 	  case UnSubscribe(user:Actor) =>
 	    listeners -= user.hashCode
