@@ -2,7 +2,7 @@ package eero.chat.model
 
 import _root_.net.liftweb.mapper._
 import _root_.net.liftweb.util._
-import scala.xml.Text
+import scala.xml._
 import net.liftweb.http.S
 
 /**
@@ -36,7 +36,23 @@ class User extends MegaProtoUser[User] {
   object nick extends MappedPoliteString(this,16) {  
     override def displayName = fieldOwner.nickDisplayName  
     override val fieldId = Some(Text("txtNick"))  
-  }  
+  }
    
-  def nickDisplayName = S.??("Nickname")  
+  def nickDisplayName = S.??("Nickname")
+  
+		  
+  
+	  
+  def render: NodeSeq = 
+  {
+	
+    val colors = "#FF0000" :: "#FF00FF" :: "#99FF66" :: "#6633FF" ::
+   				 "#000066" :: "#993333" :: Nil
+
+    def pickColor(l:Long) = colors drop (l % colors.length ).toInt head
+    val color = "color:" + pickColor (this.id.is)
+    
+    <span style={color}><em>{this.nick.is}</em></span>
+  }
+  
 }

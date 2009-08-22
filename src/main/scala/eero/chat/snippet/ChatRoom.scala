@@ -20,8 +20,9 @@ import java.util.Date
 
 import scala.xml.{NodeSeq, Text, Node} 
 
-class ChatRoom 
+class ChatRoom
 {
+//  object room extends SessionVariable
   
   def say(form: NodeSeq) = 
   {

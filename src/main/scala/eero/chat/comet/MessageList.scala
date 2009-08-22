@@ -10,36 +10,47 @@ import scala.collection.mutable.ListBuffer
 import net.liftweb.http._
 import net.liftweb.util._
 import net.liftweb.http.SHtml._
-import  net.liftweb.http.js.JsCmds.SetHtml  
+import net.liftweb.http.js.JsCmds.SetHtml  
 
-class UserActor extends CometActor
+class MessageList extends CometActor
 {
   
   override def defaultPrefix = Full("chat")
-  private var messages = List[Message]()
+  var messages = List[Message]()
+  private val user = User.currentUser.getOrElse( null )
   
-  def getMessages = messages
   def msgList = messages.flatMap( _.render )
+  
   def render = bind( "messages"-> msgDiv)
+  
+  
   def msgDiv = 
-    <div id="messages" style="height: 200px; overflow : auto;">
+    <div id="messages" style="height: 300px; overflow : auto;">
     {msgList}
     </div>
-  
+
+    
   override def lowPriority =
   {
     case Send(message: Message) =>
-      messages = message :: messages
-      partialUpdate(SetHtml("messages", msgList))
+      {
+        messages = message :: messages
+        partialUpdate(SetHtml("messages", msgList))
+      }
   }
+
   override def localSetup 
   {
-    DefaultRoom ! Join(this)
+    assert( user != null , "Not logged in")
+    DefaultRoom ! Subscribe(this)
+    DefaultRoom ! Join(user)
     super.localSetup
   }
+  
   override def localShutdown 
   {
-    DefaultRoom ! Leave(this)
+    DefaultRoom ! UnSubscribe(this)
+    DefaultRoom ! Leave(user)
     super.localShutdown
   }
 }

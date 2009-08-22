@@ -33,6 +33,8 @@ class MessageListTest extends TestCase
    */
   }
   
+  
+  def testBlaa = print("Nothing here")
   /*
   def testSingleMessage = 
   {

@@ -1,13 +1,18 @@
 <lift:surround with="default" at="content">
  	<lift:Util.in>
- 			<lift:comet type="UserActor" name="default">				
- 					<chat:messages/>
- 			</lift:comet>
+ 		 <lift:comet type="MemberList" name="default">
+ 			<chat:members/>
+ 		</lift:comet>
+ 		<hr class="space" />
+ 		<lift:comet type="MessageList" name="default">				
+ 			<chat:messages/>
+ 		</lift:comet>
+		<hr class="space" />
  		<lift:ChatRoom.say form="post">
  			<message:text>Message</message:text><message:submit>Say</message:submit>
  		</lift:ChatRoom.say>
 	</lift:Util.in>
-
+	
 	<lift:Util.out>Please
     	<lift:menu.item name="Login">Log In</lift:menu.item>
 	</lift:Util.out>
