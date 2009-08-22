@@ -1,9 +1,9 @@
 package eero.chat
 
-import _root_.junit.framework._
+import junit.framework._
 import Assert._
-import _root_.scala.xml.XML
-import _root_.net.liftweb.util._
+import scala.xml.XML
+import net.liftweb.util._
 
 import java.lang.Thread
 
@@ -24,21 +24,24 @@ class MockUser extends Actor
   }
 }
 
-class RoomActorTest extends TestCase
+class RoomMasterTest extends TestCase
 {
  
-  var room = new RoomActor
+  var room = new RoomMaster
   var pete = new MockUser
   val hello = Message.create.text("Hello Room 1").room(1)
   val helloRoom2 = Message.create.text("Hello Room 2").room(2)
+  val nick = "Mr.T"
+  val sender = User.create.nick(nick)
 
   override def setUp =
   {
-    room = new RoomActor
+    room = new RoomMaster
     pete = new MockUser
     room.start
     pete.start
-    room ! Join( pete )
+    room ! Join( sender )
+    room ! Subscribe( pete )
     Thread.sleep(100)
   }
   override def tearDown = 
@@ -60,9 +63,9 @@ class RoomActorTest extends TestCase
   {
     val id = 1
     RoomLocator.add( id, room )
-    RoomLocator.add( 2, new RoomActor )
-    RoomLocator.add( 67, new RoomActor )
-    room = RoomLocator.find(id) getOrElse new RoomActor
+    RoomLocator.add( 2, new RoomMaster )
+    RoomLocator.add( 67, new RoomMaster )
+    room = RoomLocator.find(id) getOrElse new RoomMaster
     testOneUserJoinAndSend
   }
   
@@ -70,7 +73,7 @@ class RoomActorTest extends TestCase
   {
     val laura = new MockUser
     laura.start
-    room ! Join( laura )
+    room ! Subscribe( laura )
     testOneUserJoinAndSend
     val received = laura.latest
 	assertNotNull("Did not receive anything!", received)
@@ -79,7 +82,8 @@ class RoomActorTest extends TestCase
   
   def testLeaveRoom =
   {
-    room ! Leave( pete )
+    room ! Leave( sender )
+    room ! UnSubscribe( pete )
     Thread.sleep(100)
     room ! Send( hello )
     Thread.sleep(100)
